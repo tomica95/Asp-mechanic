@@ -39,6 +39,7 @@ namespace Mechanic
 
             #region Role CRUD
             services.AddTransient<ICreateRoleCommand, EfCreateRoleCommand>();
+            services.AddTransient<IDeleteRoleCommand, EfDeleteRoleCommand>();
             #endregion
 
             services.AddControllers();

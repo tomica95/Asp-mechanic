@@ -45,8 +45,18 @@ namespace Mechanic.Controllers
 
         // DELETE api/<RoleController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id,[FromServices]IDeleteRoleCommand command)
         {
+            try 
+            {
+                command.Execute(id);
+                return NoContent();
+            }
+            catch(EntryPointNotFoundException ex)   
+             {
+                return NotFound();
+            }
+            
         }
     }
 }
