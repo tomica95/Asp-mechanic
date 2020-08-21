@@ -41,11 +41,13 @@ namespace Mechanic
 
             #region Validation
             services.AddTransient<CreateRoleValidation>();
+            services.AddTransient<UpdateRoleValidation>();
             #endregion
 
             #region Role CRUD
             services.AddTransient<ICreateRoleCommand, EfCreateRoleCommand>();
             services.AddTransient<IDeleteRoleCommand, EfDeleteRoleCommand>();
+            services.AddTransient<IUpdateRoleCommand, EfUpdateRoleCommand>();
             #endregion
 
             services.AddControllers();

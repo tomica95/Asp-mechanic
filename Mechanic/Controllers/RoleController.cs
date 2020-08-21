@@ -39,8 +39,11 @@ namespace Mechanic.Controllers
 
         // PUT api/<RoleController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(int id, [FromBody]RoleDTO dto,[FromServices]IUpdateRoleCommand command)
         {
+            dto.Id = id;
+            command.Execute(dto);
+            return NoContent();
         }
 
         // DELETE api/<RoleController>/5
