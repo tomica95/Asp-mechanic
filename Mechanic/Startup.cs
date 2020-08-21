@@ -7,6 +7,8 @@ using AutoMapper;
 using DataAccess;
 using Implementation.Commands.RoleCommands;
 using Implementation.Profiles;
+using Implementation.Validations;
+using Mechanic.Core;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -37,6 +39,10 @@ namespace Mechanic
             services.AddAutoMapper(typeof(RoleProfile));
             #endregion
 
+            #region Validation
+            services.AddTransient<CreateRoleValidation>();
+            #endregion
+
             #region Role CRUD
             services.AddTransient<ICreateRoleCommand, EfCreateRoleCommand>();
             services.AddTransient<IDeleteRoleCommand, EfDeleteRoleCommand>();
@@ -54,6 +60,8 @@ namespace Mechanic
             }
 
             app.UseRouting();
+
+            app.UseMiddleware<GlobalExceptionHandler>();
 
             app.UseAuthorization();
 
