@@ -7,30 +7,27 @@ using Application.Dto;
 using System.Text.RegularExpressions;
 using Domain.Entities;
 using DataAccess;
+using AutoMapper;
 
 namespace Implementation.Commands.RoleCommands
 {
-    public class EfCreateRoleCommand : ICreateRoleCommand
+    public class EfCreateRoleCommand :BaseCommand,ICreateRoleCommand
     {
-        private readonly Context _context;
+        
         public int Id => 1;
 
         public string Name => "Create new Role";
 
-        public EfCreateRoleCommand(Context context) 
+        public EfCreateRoleCommand(Context context, IMapper mapper) : base(context,mapper)
         {
-            _context = context;
+            
         }
 
         public void Execute(RoleDTO dto)
         {
-            var role = new Role
-            {
-                Name = dto.Name
-            };
-
-            _context.Roles.Add(role);
-            _context.SaveChanges();
+            var role = Mapper.Map<Role>(dto);
+            Context.Roles.Add(role);
+            Context.SaveChanges();
         }
     }
 }

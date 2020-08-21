@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Application.Commands.Role;
+using Application.Dto;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -28,8 +30,11 @@ namespace Mechanic.Controllers
 
         // POST api/<RoleController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] RoleDTO dto,
+            [FromServices] ICreateRoleCommand command)
         {
+            command.Execute(dto);
+
         }
 
         // PUT api/<RoleController>/5
