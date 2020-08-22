@@ -39,10 +39,11 @@ namespace Mechanic.Controllers
 
         // POST api/<RoleController>
         [HttpPost]
-        public void Post([FromBody] RoleDTO dto,
+        public IActionResult Post([FromBody] RoleDTO dto,
             [FromServices] ICreateRoleCommand command)
         {
             executor.ExecuteCommand(command, dto);
+            return NoContent();
         }
 
         // PUT api/<RoleController>/5
@@ -56,9 +57,10 @@ namespace Mechanic.Controllers
 
         // DELETE api/<RoleController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id,[FromServices]IDeleteRoleCommand command)
+        public IActionResult Delete(int id,[FromServices]IDeleteRoleCommand command)
         {
             executor.ExecuteCommand(command,id);
+            return NoContent();
         }
     }
 }
