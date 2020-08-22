@@ -19,7 +19,7 @@ namespace Implementation.Commands.RoleCommands
             _validation = validation;
         }
 
-        public int Id => 4;
+        public int Id => 2;
 
         public string Name => "Update Role";
 
