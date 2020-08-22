@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Application;
 using Application.Commands.Role;
 using Application.Dto;
 using Microsoft.AspNetCore.Mvc;
@@ -14,11 +15,19 @@ namespace Mechanic.Controllers
     [ApiController]
     public class RoleController : ControllerBase
     {
+        private readonly IApplicationActor actor;
+        private readonly CommandExecutor executor;
+
+        public RoleController(IApplicationActor actor,CommandExecutor executor)
+        {
+            this.actor = actor;
+            this.executor = executor;
+        }
         // GET: api/<RoleController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            return Ok(actor);
         }
 
         // GET api/<RoleController>/5
@@ -33,8 +42,7 @@ namespace Mechanic.Controllers
         public void Post([FromBody] RoleDTO dto,
             [FromServices] ICreateRoleCommand command)
         {
-            command.Execute(dto);
-
+            executor.ExecuteCommand(command, dto);
         }
 
         // PUT api/<RoleController>/5
@@ -42,7 +50,7 @@ namespace Mechanic.Controllers
         public IActionResult Put(int id, [FromBody]RoleDTO dto,[FromServices]IUpdateRoleCommand command)
         {
             dto.Id = id;
-            command.Execute(dto);
+            executor.ExecuteCommand(command, dto);
             return NoContent();
         }
 
@@ -50,7 +58,7 @@ namespace Mechanic.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id,[FromServices]IDeleteRoleCommand command)
         {
-            command.Execute(id);
+            executor.ExecuteCommand(command,id);
         }
     }
 }

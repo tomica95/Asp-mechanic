@@ -8,7 +8,7 @@ namespace Application.Exceptions
     public class UnauthorizedCommandException : Exception
     {
         public UnauthorizedCommandException(IUseCase useCase, IApplicationActor actor)
-              : base($"Actor: ({actor.Id}) {actor.Identity} \n Command: {useCase.Name}")
+              : base($"Actor with an id:({actor.Id}) {actor.Identity} \n Command: {useCase.Name}")
         {
 
         }

@@ -8,6 +8,6 @@ namespace Application
     {
         int Id { get; }
         string Identity { get; }
-       // IEnumerable<int> AllowedCommands { get; }
+        IEnumerable<int> AllowedCommands { get; }
     }
 }

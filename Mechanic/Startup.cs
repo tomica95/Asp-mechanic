@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Application;
 using Application.Commands.Role;
 using AutoMapper;
 using DataAccess;
@@ -42,6 +43,8 @@ namespace Mechanic
             #region Validation
             services.AddTransient<CreateRoleValidation>();
             services.AddTransient<UpdateRoleValidation>();
+            services.AddTransient<IApplicationActor,FakeApiActor>();
+            services.AddTransient<CommandExecutor>();
             #endregion
 
             #region Role CRUD
