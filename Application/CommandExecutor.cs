@@ -13,14 +13,17 @@ namespace Application
     public class CommandExecutor
     {
         private readonly IApplicationActor actor;
+        private readonly IUseCaseLogger logger;
 
-        public CommandExecutor(IApplicationActor actor) 
+        public CommandExecutor(IApplicationActor actor,IUseCaseLogger logger) 
         {
             this.actor = actor;
+            this.logger = logger;
         }
         public TResult ExecuteQuery<TSearch, TResult>
             (IQuery<TSearch, TResult> query, TSearch search)
         {
+            logger.Log(query, actor, search);
 
             if (!actor.AllowedCommands.Contains(query.Id))
             {
@@ -33,7 +36,8 @@ namespace Application
             ICommand<TRequest> command,
             TRequest request) 
         {
-          
+            logger.Log(command, actor, request);
+
             if (!actor.AllowedCommands.Contains(command.Id))
             {
                 throw new UnauthorizedCommandException(command,actor);

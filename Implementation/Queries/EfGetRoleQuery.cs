@@ -24,7 +24,7 @@ namespace Implementation.Queries
 
         public int Id => 1;
 
-        public string Name => "Role Sreach";
+        public string Name => "Role Search";
 
         public IEnumerable<RoleDTO> Execute(RoleSearch search)
         {

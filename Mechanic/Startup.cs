@@ -7,6 +7,7 @@ using Application.Commands.Role;
 using AutoMapper;
 using DataAccess;
 using Implementation.Commands.RoleCommands;
+using Implementation.Logging;
 using Implementation.Profiles;
 using Implementation.Queries;
 using Implementation.Validations;
@@ -46,6 +47,7 @@ namespace Mechanic
             services.AddTransient<UpdateRoleValidation>();
             services.AddTransient<IApplicationActor,FakeApiActor>();
             services.AddTransient<CommandExecutor>();
+            services.AddTransient<IUseCaseLogger,ConsoleUseCaseLogger>();
             #endregion
 
             #region Role CRUD
