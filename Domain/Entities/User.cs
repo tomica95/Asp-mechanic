@@ -12,8 +12,12 @@ namespace Domain.Entities
         public string Email { get; set; }
         public string Image { get; set; }
 
+        // User has one role
         public int RoleId { get; set; }
         public virtual Role Role { get; set; }
+
+        //  User has many UserUseCases
+        public virtual ICollection<UserUseCase> UseCases { get; set; }
 
     }
 }

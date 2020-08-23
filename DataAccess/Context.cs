@@ -9,6 +9,7 @@ namespace DataAccess
     {
         public DbSet<Role> Roles { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<UserUseCase> UserUseCases { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Data Source=Tomica\SQLEXPRESS;Initial Catalog=Mechanic;Integrated Security=True");
