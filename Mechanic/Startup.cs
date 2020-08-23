@@ -8,6 +8,7 @@ using AutoMapper;
 using DataAccess;
 using Implementation.Commands.RoleCommands;
 using Implementation.Profiles;
+using Implementation.Queries;
 using Implementation.Validations;
 using Mechanic.Core;
 using Microsoft.AspNetCore.Builder;
@@ -51,6 +52,10 @@ namespace Mechanic
             services.AddTransient<ICreateRoleCommand, EfCreateRoleCommand>();
             services.AddTransient<IDeleteRoleCommand, EfDeleteRoleCommand>();
             services.AddTransient<IUpdateRoleCommand, EfUpdateRoleCommand>();
+            #endregion
+
+            #region Role
+            services.AddTransient<IGetRoleQuery,EfGetRoleQuery>();
             #endregion
 
             services.AddControllers();

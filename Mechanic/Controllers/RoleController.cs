@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Application;
 using Application.Commands.Role;
 using Application.Dto;
+using Application.Searches;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -25,9 +26,11 @@ namespace Mechanic.Controllers
         }
         // GET: api/<RoleController>
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult Get(
+            [FromQuery]RoleSearch search,
+            [FromServices]IGetRoleQuery query)
         {
-            return Ok(actor);
+            return Ok(executor.ExecuteQuery(query,search));
         }
 
         // GET api/<RoleController>/5
