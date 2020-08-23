@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Application;
 using Application.Commands.Role;
@@ -12,13 +13,17 @@ using Implementation.Profiles;
 using Implementation.Queries;
 using Implementation.Validations;
 using Mechanic.Core;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 
 namespace Mechanic
 {
@@ -45,7 +50,6 @@ namespace Mechanic
             #region Validation
             services.AddTransient<CreateRoleValidation>();
             services.AddTransient<UpdateRoleValidation>();
-            services.AddTransient<IApplicationActor,FakeApiActor>();
             services.AddTransient<CommandExecutor>();
             services.AddTransient<IUseCaseLogger,ConsoleUseCaseLogger>();
             services.AddTransient<JwtManager>();
@@ -59,6 +63,55 @@ namespace Mechanic
 
             #region Role
             services.AddTransient<IGetRoleQuery,EfGetRoleQuery>();
+            #endregion
+
+            #region JWT
+            services.AddTransient<JwtManager>();
+            services.AddHttpContextAccessor();
+
+            services.AddTransient<IApplicationActor>(x =>
+            {
+                var accessor = x.GetService<IHttpContextAccessor>();
+
+                var user = accessor.HttpContext.User;
+
+                if (user.FindFirst("ActorData") == null)
+                {
+                    throw new InvalidOperationException("Actor data doesn't exist.");
+                }
+
+                var actorString = user.FindFirst("ActorData").Value;
+
+                var actor = JsonConvert.DeserializeObject<JwtActor>(actorString);
+
+                return actor;
+
+            });
+
+            
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(cfg =>
+            {
+                cfg.RequireHttpsMetadata = false;
+                cfg.SaveToken = true;
+                cfg.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidIssuer = "Asp-mechanic",
+                    ValidateIssuer = true,
+                    ValidAudience = "Any",
+                    ValidateAudience = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("ThisIsMyVerySecretKey")),
+                    ValidateIssuerSigningKey = true,
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.Zero
+                };
+            });
+
             #endregion
 
             services.AddControllers();
@@ -75,7 +128,7 @@ namespace Mechanic
             app.UseRouting();
 
             app.UseMiddleware<GlobalExceptionHandler>();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
