@@ -48,6 +48,7 @@ namespace Mechanic
             services.AddTransient<IApplicationActor,FakeApiActor>();
             services.AddTransient<CommandExecutor>();
             services.AddTransient<IUseCaseLogger,ConsoleUseCaseLogger>();
+            services.AddTransient<JwtManager>();
             #endregion
 
             #region Role CRUD
