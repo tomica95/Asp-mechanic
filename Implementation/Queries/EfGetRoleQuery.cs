@@ -1,8 +1,10 @@
 ﻿using Application.Commands.Role;
 using Application.Dto;
+using Application.DTO.Pagination;
 using Application.Searches;
 using AutoMapper;
 using DataAccess;
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,23 +28,28 @@ namespace Implementation.Queries
 
         public string Name => "Role Search";
 
-        public IEnumerable<RoleDTO> Execute(RoleSearch search)
+        public PagedResponse<RoleDTO> Execute(RoleSearch dto)
         {
             var query = context.Roles.AsQueryable();
 
-            if (!string.IsNullOrEmpty(search.Name) || !string.IsNullOrWhiteSpace(search.Name))
+            if (!string.IsNullOrEmpty(dto.Name) || !string.IsNullOrWhiteSpace(dto.Name))
             {
-                query = query.Where(role => role.Name.ToLower().Contains(search.Name.ToLower()));
+                query = query.Where(role => role.Name.ToLower().Contains(dto.Name.ToLower()));
             }
+            var skipCount = dto.PerPage * (dto.Page - 1);
+            var roles = mapper.Map<List<RoleDTO>>(query.Skip(skipCount).Take(dto.PerPage).ToList());
 
-            return query.Select(x=>new RoleDTO
+            var reponse = new PagedResponse<RoleDTO>
             {
-                Id = x.Id,
-                Name = x.Name
-                
-            }).ToList();
+                CurrentPage = dto.Page,
+                ItemsPerPage = dto.PerPage,
+                TotalCount = query.Count(),
+                items = roles
+            };
 
-            
+            return reponse;
+
+
         }
     }
 }
