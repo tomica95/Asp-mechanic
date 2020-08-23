@@ -23,22 +23,19 @@ namespace Mechanic.Core
 
         public string MakeToken(string username, string password)
         {
-            /* var user = _context.Users.Include(u => u.UseCases)
-                 .FirstOrDefault(x => x.Username == username && x.Password == password); 
+            var user = _context.Users.Include(u => u.UseCases)
+                .FirstOrDefault(x => x.Username == username && x.Password == password);
 
-             if (user == null)
-             {
-                 return null;
-             }
-
-             var actor = new JWTActor
-             {
-                 Id = user.Id,
-                 AllowedCommands = user.UseCases.Select(uc => uc.UseCaseId),
-                 Identity = user.Username
-             };*/
-
-            var actor = new FakeApiActor();
+            if (user == null)
+            {
+                return null;
+            }
+            var actor = new JwtActor
+            {
+                Id = user.Id,
+                AllowedCommands = user.UseCases.Select(uc => uc.UseCaseId),
+                Identity = user.Username
+            };
 
             var issuer = "Asp-mechanic";
             var secretKey = "ThisIsMyVerySecretKey";

@@ -23,12 +23,25 @@ namespace Mechanic.Controllers
 
         // POST api/<TokenController>
         [HttpPost]
-        public IActionResult Post()
+        public IActionResult Post([FromBody] LoginRequest request)
         {
+            var token = manager.MakeToken(request.Username, request.Password);
+            if (token == null) 
+            {
+                return Unauthorized();
+            }
             return Ok(new
             {
-                token = manager.MakeToken("", "")
+                token
             });
-        }   
+        }
+
+        public class LoginRequest 
+        {
+            public string Username { get; set; }
+
+            public string  Password { get; set; }
+        }
+
     }
 }
