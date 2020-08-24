@@ -5,10 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Application;
 using Application.Commands.Role;
+using Application.Commands.User;
 using Application.Queries;
 using AutoMapper;
 using DataAccess;
 using Implementation.Commands.RoleCommands;
+using Implementation.Commands.UserCommands;
 using Implementation.Logging;
 using Implementation.Profiles;
 using Implementation.Queries;
@@ -55,18 +57,22 @@ namespace Mechanic
             services.AddTransient<CommandExecutor>();
             services.AddTransient<IUseCaseLogger,DataBaseUseCaseLogger>();
             services.AddTransient<JwtManager>();
+            services.AddTransient<CreateUserValidation>();
             #endregion
 
             #region Role CRUD
             services.AddTransient<ICreateRoleCommand, EfCreateRoleCommand>();
             services.AddTransient<IDeleteRoleCommand, EfDeleteRoleCommand>();
             services.AddTransient<IUpdateRoleCommand, EfUpdateRoleCommand>();
-
             #endregion
 
             #region Role queries
             services.AddTransient<IGetRoleQuery,EfGetRoleQuery>();
             services.AddTransient<IGetOneRoleQuery, EfGetOneRoleQuery>();
+            #endregion
+
+            #region User CRUD
+            services.AddTransient<ICreateUserCommand, EfCreateUserCommand>();
             #endregion
 
             #region User queries
