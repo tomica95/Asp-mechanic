@@ -26,13 +26,13 @@ namespace DataAccess.Configs
                 .IsRequired()
                 .HasMaxLength(60);
 
-            builder.HasMany(caruser => caruser.CarUsers)
-                .WithOne(caruser => caruser.Car)
-                .HasForeignKey(caruser => caruser.CarId)
+            builder.HasMany(cu => cu.CarUsers)
+                .WithOne(cu => cu.Car)
+                .HasForeignKey(cu => cu.CarId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(c => c.Leader)
-                .WithMany(c => c.Cars)
+                .WithMany(u => u.Cars)
                 .HasForeignKey(c => c.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
         }

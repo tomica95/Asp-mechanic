@@ -17,6 +17,8 @@ namespace Domain.Entities
         public int UserId { get; set; }
         public virtual User Leader { get; set; }
 
+        //Car has many repairs
+        public virtual ICollection<Repair> Repairs { get; set; }
 
     }
 }

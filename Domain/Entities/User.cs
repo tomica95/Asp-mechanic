@@ -24,5 +24,7 @@ namespace Domain.Entities
         // One user can lead many repairs
         public virtual ICollection<Car> Cars { get; set; }
 
+        public virtual ICollection<Repair> Repairs { get; set; }
+
     }
 }

@@ -11,8 +11,10 @@ namespace DataAccess
         public DbSet<User> Users { get; set; }
         public DbSet<UserUseCase> UserUseCases { get; set; }
         public DbSet<UseCaseLog> UseCaseLogs { get; set; }
-        
         public DbSet<Car> Cars { get; set; }
+        public DbSet<Repair> Repairs { get; set; }
+        
+        
 
 
 
@@ -26,6 +28,7 @@ namespace DataAccess
             modelBuilder.ApplyConfiguration(new RoleConfig());
             modelBuilder.ApplyConfiguration(new UserConfig());
             modelBuilder.ApplyConfiguration(new CarConfig());
+            modelBuilder.ApplyConfiguration(new RepairConfig());
 
             modelBuilder.Entity<CarUser>()
                 .HasKey(caruser => new { caruser.CarId, caruser.UserId });
