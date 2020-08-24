@@ -51,7 +51,7 @@ namespace Mechanic
             services.AddTransient<CreateRoleValidation>();
             services.AddTransient<UpdateRoleValidation>();
             services.AddTransient<CommandExecutor>();
-            services.AddTransient<IUseCaseLogger,ConsoleUseCaseLogger>();
+            services.AddTransient<IUseCaseLogger,DataBaseUseCaseLogger>();
             services.AddTransient<JwtManager>();
             #endregion
 
