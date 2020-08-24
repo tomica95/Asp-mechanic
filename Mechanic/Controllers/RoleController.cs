@@ -18,12 +18,10 @@ namespace Mechanic.Controllers
     [ApiController]
     public class RoleController : ControllerBase
     {
-        private readonly IApplicationActor actor;
         private readonly CommandExecutor executor;
 
-        public RoleController(IApplicationActor actor,CommandExecutor executor)
+        public RoleController(CommandExecutor executor)
         {
-            this.actor = actor;
             this.executor = executor;
         }
         // GET: api/<RoleController>
@@ -37,9 +35,9 @@ namespace Mechanic.Controllers
 
         // GET api/<RoleController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id, [FromServices] IGetOneRoleQuery query)
         {
-            return "value";
+            return Ok(executor.ExecuteQuery(query, id));
         }
 
         // POST api/<RoleController>

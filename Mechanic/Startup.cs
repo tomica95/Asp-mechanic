@@ -59,10 +59,12 @@ namespace Mechanic
             services.AddTransient<ICreateRoleCommand, EfCreateRoleCommand>();
             services.AddTransient<IDeleteRoleCommand, EfDeleteRoleCommand>();
             services.AddTransient<IUpdateRoleCommand, EfUpdateRoleCommand>();
+
             #endregion
 
-            #region Role
+            #region Role queris
             services.AddTransient<IGetRoleQuery,EfGetRoleQuery>();
+            services.AddTransient<IGetOneRoleQuery, EfGetOneRoleQuery>();
             #endregion
 
             #region JWT

@@ -27,7 +27,7 @@ namespace Implementation.Commands.RoleCommands
 
              if (role == null)
              {
-                  throw new EntityNotFoundException(id,typeof(Role));
+                  throw new EntityNotFoundException(id);
              }
 
                 role.DeletedAt = DateTime.Now;
