@@ -22,7 +22,7 @@ namespace Implementation.Queries.UserQueries
             this.context = context;
         }
 
-        public int Id => 1;
+        public int Id => 10;
 
         public string Name => "Get Users";
 

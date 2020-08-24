@@ -71,6 +71,7 @@ namespace Mechanic
 
             #region User queries
             services.AddTransient<IGetUserQuery, EfGetUserQuery>();
+            services.AddTransient<IGetOneUserQuery, EfGetOneUserQuery>();
             #endregion
 
             #region JWT

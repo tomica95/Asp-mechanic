@@ -31,9 +31,9 @@ namespace Mechanic.Controllers
 
         // GET api/<UsersController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id, [FromServices] IGetOneUserQuery query)
         {
-            return "value";
+            return Ok(executor.ExecuteQuery(query, id));
         }
 
         // POST api/<UsersController>

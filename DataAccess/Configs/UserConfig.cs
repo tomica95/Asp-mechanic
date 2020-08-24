@@ -34,6 +34,16 @@ namespace DataAccess.Configs
                 .WithMany(u => u.Users)
                 .HasForeignKey(u => u.RoleId)
                 .OnDelete(DeleteBehavior.Restrict);
+            //user has many cars, car has many users
+            builder.HasMany(uc => uc.UserCars)
+                .WithOne(u => u.User)
+                .HasForeignKey(uc => uc.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+            builder.HasMany(r => r.Repairs)
+                .WithOne(u => u.User)
+                .HasForeignKey(r => r.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
         }
 
     }
