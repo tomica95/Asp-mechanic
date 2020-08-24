@@ -5,12 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Application;
 using Application.Commands.Role;
+using Application.Queries;
 using AutoMapper;
 using DataAccess;
 using Implementation.Commands.RoleCommands;
 using Implementation.Logging;
 using Implementation.Profiles;
 using Implementation.Queries;
+using Implementation.Queries.UserQueries;
 using Implementation.Validations;
 using Mechanic.Core;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -44,7 +46,7 @@ namespace Mechanic
             #endregion
 
             #region Automapper
-            services.AddAutoMapper(typeof(RoleProfile));
+            services.AddAutoMapper(typeof(RoleProfile),typeof(UserProfile));
             #endregion
 
             #region Validation
@@ -62,9 +64,13 @@ namespace Mechanic
 
             #endregion
 
-            #region Role queris
+            #region Role queries
             services.AddTransient<IGetRoleQuery,EfGetRoleQuery>();
             services.AddTransient<IGetOneRoleQuery, EfGetOneRoleQuery>();
+            #endregion
+
+            #region User queries
+            services.AddTransient<IGetUserQuery, EfGetUserQuery>();
             #endregion
 
             #region JWT

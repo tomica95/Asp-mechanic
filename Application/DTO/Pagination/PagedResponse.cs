@@ -10,7 +10,7 @@ namespace Application.DTO.Pagination
         public int CurrentPage { get; set; }
         public int ItemsPerPage { get; set; }
 
-        public IEnumerable<T> items { get; set; }
+        public IEnumerable<T> Items { get; set; }
 
         public int PagesCount => (int)Math.Ceiling((float)TotalCount/ItemsPerPage);
     }

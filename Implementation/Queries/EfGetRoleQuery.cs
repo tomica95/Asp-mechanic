@@ -44,7 +44,7 @@ namespace Implementation.Queries
                 CurrentPage = dto.Page,
                 ItemsPerPage = dto.PerPage,
                 TotalCount = query.Count(),
-                items = roles
+                Items = roles
             };
 
             return reponse;
