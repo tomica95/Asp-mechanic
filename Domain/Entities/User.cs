@@ -19,5 +19,10 @@ namespace Domain.Entities
         //  User has many UserUseCases
         public virtual ICollection<UserUseCase> UseCases { get; set; }
 
+        // User can work-has many Cars
+        public virtual ICollection<CarUser> UserCars { get; set; } = new HashSet<CarUser>();  
+        // One user can lead many repairs
+        public virtual ICollection<Car> Cars { get; set; }
+
     }
 }

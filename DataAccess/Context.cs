@@ -10,8 +10,11 @@ namespace DataAccess
         public DbSet<Role> Roles { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserUseCase> UserUseCases { get; set; }
-        
         public DbSet<UseCaseLog> UseCaseLogs { get; set; }
+        
+        public DbSet<Car> Cars { get; set; }
+
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -22,6 +25,10 @@ namespace DataAccess
         {
             modelBuilder.ApplyConfiguration(new RoleConfig());
             modelBuilder.ApplyConfiguration(new UserConfig());
+            modelBuilder.ApplyConfiguration(new CarConfig());
+
+            modelBuilder.Entity<CarUser>()
+                .HasKey(caruser => new { caruser.CarId, caruser.UserId });
         }
 
         public override int SaveChanges()
