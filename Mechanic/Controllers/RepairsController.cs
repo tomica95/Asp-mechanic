@@ -52,8 +52,15 @@ namespace Mechanic.Controllers
 
         // PUT api/<RepairsController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(int id, 
+            [FromBody] RepairDTO dto,
+            [FromServices] IUpdateRepairCommand command)
         {
+            dto.Id = id;
+
+            executor.ExecuteCommand(command, dto);
+
+            return StatusCode(StatusCodes.Status202Accepted);
         }
 
         // DELETE api/<RepairsController>/5
