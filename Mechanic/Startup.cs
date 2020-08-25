@@ -168,6 +168,13 @@ namespace Mechanic
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(x =>
+            {
+                x.AllowAnyOrigin();
+                x.AllowAnyMethod();
+                x.AllowAnyHeader();
+            });
+
             app.UseRouting();
 
             app.UseMiddleware<GlobalExceptionHandler>();
