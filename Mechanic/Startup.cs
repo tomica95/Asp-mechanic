@@ -5,12 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Application;
 using Application.Commands.Car;
+using Application.Commands.Repair;
 using Application.Commands.Role;
 using Application.Commands.User;
 using Application.Queries;
 using AutoMapper;
 using DataAccess;
 using Implementation.Commands.CarCommands;
+using Implementation.Commands.RepairCommands;
 using Implementation.Commands.RoleCommands;
 using Implementation.Commands.UserCommands;
 using Implementation.Logging;
@@ -50,7 +52,7 @@ namespace Mechanic
             #endregion
 
             #region Automapper
-            services.AddAutoMapper(typeof(RoleProfile),typeof(UserProfile),typeof(CarProfile));
+            services.AddAutoMapper(typeof(RoleProfile),typeof(UserProfile),typeof(CarProfile),typeof(RepairProfile));
             #endregion
 
             #region Validation
@@ -63,6 +65,7 @@ namespace Mechanic
             services.AddTransient<UpdateUserValidation>();
             services.AddTransient<CreateCarValidation>();
             services.AddTransient<UpdateCarValidation>();
+            services.AddTransient<CreateRepairValidation>();
             #endregion
 
             #region Role CRUD
@@ -91,6 +94,14 @@ namespace Mechanic
             services.AddTransient<ICreateCarCommand, EfCreateCarCommand>();
             services.AddTransient<IUpdateCarCommand,EfUpdateCarCommand>();
             services.AddTransient<IDeleteCarCommand, EfDeleteCarCommand>();
+            #endregion
+
+            #region Car queries
+
+            #endregion
+
+            #region Repair CRUD
+            services.AddTransient<ICreateRepair, EfCreateRepair>();
             #endregion
 
 
