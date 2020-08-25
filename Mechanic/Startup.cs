@@ -18,6 +18,7 @@ using Implementation.Commands.UserCommands;
 using Implementation.Logging;
 using Implementation.Profiles;
 using Implementation.Queries;
+using Implementation.Queries.CarQueries;
 using Implementation.Queries.RepairQueries;
 using Implementation.Queries.UserQueries;
 using Implementation.Validations;
@@ -99,7 +100,7 @@ namespace Mechanic
             #endregion
 
             #region Car queries
-
+            services.AddTransient<IGetAllCars,EfGetAllCarsQuery>();
             #endregion
 
             #region Repair CRUD

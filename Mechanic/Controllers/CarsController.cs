@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Application;
 using Application.Commands.Car;
 using Application.DTO;
+using Application.Queries;
+using Application.Searches;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,9 +27,9 @@ namespace Mechanic.Controllers
 
         // GET: api/<ValuesController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get([FromQuery] SearchCarDto dto, [FromServices] IGetAllCars query)
         {
-            return new string[] { "value1", "value2" };
+            return Ok(executor.ExecuteQuery(query, dto));
         }
 
         // GET api/<ValuesController>/5
