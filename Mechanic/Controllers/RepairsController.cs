@@ -6,6 +6,7 @@ using Application;
 using Application.Commands.Repair;
 using Application.DTO;
 using Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,6 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Mechanic.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class RepairsController : ControllerBase
@@ -65,8 +67,12 @@ namespace Mechanic.Controllers
 
         // DELETE api/<RepairsController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id,
+            [FromServices] IDeleteRepairCommand command)
         {
+            executor.ExecuteCommand(command, id);
+
+            return NoContent();
         }
     }
 }

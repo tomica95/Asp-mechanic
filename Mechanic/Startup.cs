@@ -104,6 +104,7 @@ namespace Mechanic
             #region Repair CRUD
             services.AddTransient<ICreateRepair, EfCreateRepair>();
             services.AddTransient<IUpdateRepairCommand, EfUpdateRepairCommand>();
+            services.AddTransient<IDeleteRepairCommand, EfDeleteRepairCommand>();
             #endregion
 
 
