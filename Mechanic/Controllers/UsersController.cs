@@ -56,8 +56,11 @@ namespace Mechanic.Controllers
 
         // DELETE api/<UsersController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id,[FromServices] IDeleteUser command)
         {
+            executor.ExecuteCommand(command, id);
+
+            return NoContent();
         }
     }
 }

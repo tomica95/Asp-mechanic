@@ -73,6 +73,7 @@ namespace Mechanic
 
             #region User CRUD
             services.AddTransient<ICreateUserCommand, EfCreateUserCommand>();
+            services.AddTransient<IDeleteUser, EfDeleteUserCommand>();
             #endregion
 
             #region User queries
