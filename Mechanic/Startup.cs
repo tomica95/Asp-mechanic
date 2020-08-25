@@ -90,6 +90,7 @@ namespace Mechanic
             #region Car CRUD
             services.AddTransient<ICreateCarCommand, EfCreateCarCommand>();
             services.AddTransient<IUpdateCarCommand,EfUpdateCarCommand>();
+            services.AddTransient<IDeleteCarCommand, EfDeleteCarCommand>();
             #endregion
 
 
