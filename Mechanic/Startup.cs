@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Application;
+using Application.Commands.Car;
 using Application.Commands.Role;
 using Application.Commands.User;
 using Application.Queries;
 using AutoMapper;
 using DataAccess;
+using Implementation.Commands.CarCommands;
 using Implementation.Commands.RoleCommands;
 using Implementation.Commands.UserCommands;
 using Implementation.Logging;
@@ -48,7 +50,7 @@ namespace Mechanic
             #endregion
 
             #region Automapper
-            services.AddAutoMapper(typeof(RoleProfile),typeof(UserProfile));
+            services.AddAutoMapper(typeof(RoleProfile),typeof(UserProfile),typeof(CarProfile));
             #endregion
 
             #region Validation
@@ -59,6 +61,7 @@ namespace Mechanic
             services.AddTransient<JwtManager>();
             services.AddTransient<CreateUserValidation>();
             services.AddTransient<UpdateUserValidation>();
+            services.AddTransient<CreateCarValidation>();
             #endregion
 
             #region Role CRUD
@@ -82,6 +85,11 @@ namespace Mechanic
             services.AddTransient<IGetUserQuery, EfGetUserQuery>();
             services.AddTransient<IGetOneUserQuery, EfGetOneUserQuery>();
             #endregion
+
+            #region Car CRUD
+            services.AddTransient<ICreateCarCommand, EfCreateCarCommand>();
+            #endregion
+
 
             #region JWT
             services.AddTransient<JwtManager>();

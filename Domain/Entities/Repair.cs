@@ -15,7 +15,7 @@ namespace Domain.Entities
         public int UserId { get; set; }
         public virtual User User { get; set; }
 
-        //one rapair can only one car
+        //one rapair can only have one car
         public int CarId { get; set; }
         public virtual Car Car { get; set; }
 
