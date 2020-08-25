@@ -58,6 +58,7 @@ namespace Mechanic
             services.AddTransient<IUseCaseLogger,DataBaseUseCaseLogger>();
             services.AddTransient<JwtManager>();
             services.AddTransient<CreateUserValidation>();
+            services.AddTransient<UpdateUserValidation>();
             #endregion
 
             #region Role CRUD
@@ -74,6 +75,7 @@ namespace Mechanic
             #region User CRUD
             services.AddTransient<ICreateUserCommand, EfCreateUserCommand>();
             services.AddTransient<IDeleteUser, EfDeleteUserCommand>();
+            services.AddTransient<IUpdateUserCommand, EfUpdateUserCommand>();
             #endregion
 
             #region User queries
