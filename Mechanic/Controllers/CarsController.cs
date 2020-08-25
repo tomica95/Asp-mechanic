@@ -49,8 +49,13 @@ namespace Mechanic.Controllers
 
         // PUT api/<ValuesController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(int id, 
+            [FromBody] CarDTO dto,
+            [FromServices] IUpdateCarCommand command)
         {
+            dto.Id = id;
+            executor.ExecuteCommand(command, dto);
+            return NoContent();
         }
 
         // DELETE api/<ValuesController>/5
