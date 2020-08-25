@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Application;
 using Application.Commands.Repair;
 using Application.DTO;
+using Application.Queries;
+using Application.Searches;
 using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -30,13 +32,13 @@ namespace Mechanic.Controllers
 
         // GET: api/<RepairsController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get([FromQuery] SearchRepairDto dto, [FromServices] IGetAllRepairs query)
         {
-            return new string[] { "value1", "value2" };
+            return Ok(executor.ExecuteQuery(query, dto));
         }
 
-        // GET api/<RepairsController>/5
-        [HttpGet("{id}")]
+            // GET api/<RepairsController>/5
+            [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";

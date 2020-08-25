@@ -18,6 +18,7 @@ using Implementation.Commands.UserCommands;
 using Implementation.Logging;
 using Implementation.Profiles;
 using Implementation.Queries;
+using Implementation.Queries.RepairQueries;
 using Implementation.Queries.UserQueries;
 using Implementation.Validations;
 using Mechanic.Core;
@@ -107,11 +108,14 @@ namespace Mechanic
             services.AddTransient<IDeleteRepairCommand, EfDeleteRepairCommand>();
             #endregion
 
+            #region Repair queries
+            services.AddTransient<IGetAllRepairs, EfGetAllRepairs>();
+            #endregion
 
             #region JWT
             services.AddTransient<JwtManager>();
             services.AddHttpContextAccessor();
-
+            
             services.AddTransient<IApplicationActor>(x =>
             {
                 var accessor = x.GetService<IHttpContextAccessor>();
