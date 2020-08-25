@@ -54,7 +54,7 @@ namespace Mechanic
             #endregion
 
             #region Automapper
-            services.AddAutoMapper(typeof(RoleProfile),typeof(UserProfile),typeof(CarProfile),typeof(RepairProfile));
+            services.AddAutoMapper(typeof(RoleProfile),typeof(UserProfile),typeof(CarProfile),typeof(RepairProfile),typeof(LogProfile));
             #endregion
 
             #region Validation
@@ -112,6 +112,8 @@ namespace Mechanic
             #region Repair queries
             services.AddTransient<IGetAllRepairs, EfGetAllRepairs>();
             #endregion
+
+            services.AddTransient<IGetLogsQuery, EfGetLogs>();
 
             #region JWT
             services.AddTransient<JwtManager>();
