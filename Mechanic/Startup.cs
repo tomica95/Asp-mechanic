@@ -124,6 +124,7 @@ namespace Mechanic
             #region Brand CRUD
             services.AddTransient<ICreateBrandCommand, EfCreateBrandCommand>();
             services.AddTransient<IUpdateBrandCommand, EfUpdateBrandCommand>();
+            services.AddTransient<IDeleteBrandCommand, EfDeleteBrandCommand>();
             #endregion
 
             services.AddTransient<IGetLogsQuery, EfGetLogs>();

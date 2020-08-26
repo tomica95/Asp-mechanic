@@ -40,6 +40,7 @@ namespace DataAccess
             modelBuilder.Entity<User>().HasQueryFilter(r => r.DeletedAt == null);
             modelBuilder.Entity<Car>().HasQueryFilter(r => r.DeletedAt == null);
             modelBuilder.Entity<Repair>().HasQueryFilter(r => r.DeletedAt == null);
+            modelBuilder.Entity<Brand>().HasQueryFilter(r => r.DeletedAt == null);
         }
 
         public override int SaveChanges()
