@@ -30,6 +30,7 @@ namespace Implementation.Commands.CarCommands
             var car = Mapper.Map<Car>(request);
 
             car.Leader = null;
+            car.Brand = null;
             car.UserId = request.Leader.Id;
 
             Context.Cars.Add(car);

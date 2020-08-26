@@ -13,6 +13,8 @@ namespace Application.DTO
         public string RegPlate { get; set; }
         public UserDTO Leader { get; set; }
 
+        public BrandDto Brand { get; set; }
+
         public IEnumerable<UserDTO> Users { get; set; } = new List<UserDTO>();
     }
 }

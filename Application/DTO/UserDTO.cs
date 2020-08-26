@@ -15,6 +15,8 @@ namespace Application.DTO
 
         public RoleDTO Role { get; set; }
 
+        public BrandDto Brand { get; set; }
+
         public IEnumerable<CarDTO> Cars { get; set; } = new List<CarDTO>();
     }
 }

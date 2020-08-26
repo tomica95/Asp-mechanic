@@ -13,6 +13,8 @@ namespace DataAccess
         public DbSet<UseCaseLog> UseCaseLogs { get; set; }
         public DbSet<Car> Cars { get; set; }
         public DbSet<Repair> Repairs { get; set; }
+
+        public DbSet<Brand> Brands { get; set; }
         
         
 
@@ -20,7 +22,7 @@ namespace DataAccess
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=Tomica\SQLEXPRESS;Initial Catalog=MechanicsV2;Integrated Security=True");
+            optionsBuilder.UseSqlServer(@"Data Source=Tomica\SQLEXPRESS;Initial Catalog=MechanicsV3;Integrated Security=True");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -29,6 +31,7 @@ namespace DataAccess
             modelBuilder.ApplyConfiguration(new UserConfig());
             modelBuilder.ApplyConfiguration(new CarConfig());
             modelBuilder.ApplyConfiguration(new RepairConfig());
+            modelBuilder.ApplyConfiguration(new BrandConfig());
 
             modelBuilder.Entity<CarUser>()
                 .HasKey(caruser => new { caruser.CarId, caruser.UserId });

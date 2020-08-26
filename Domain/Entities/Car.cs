@@ -20,5 +20,8 @@ namespace Domain.Entities
         //Car has many repairs
         public virtual ICollection<Repair> Repairs { get; set; }
 
+        public int BrandId { get; set; }
+        public virtual Brand Brand { get; set; }
+
     }
 }

@@ -25,7 +25,14 @@ namespace Implementation.Profiles
                         Id = cu.User.Role.Id,
                         Name = cu.User.Role.Name
                     }
-                })));   
+                }))).ForMember(dto => dto.Brand,
+                    opt => opt.MapFrom(brand => new BrandDto
+                    {
+                        Id=brand.Brand.Id,
+                        BrandName = brand.Brand.BrandName,
+                       
+                    })
+                );   
         }
     }
 }

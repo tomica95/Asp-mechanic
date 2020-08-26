@@ -45,7 +45,7 @@ namespace Implementation.Commands.CarCommands
             car.CarUsers.Where(uc => uc.CarId == car.Id)
                 .ToList()
                 .ForEach(x => car.CarUsers.Remove(x));
-
+            car.Brand = null;
             foreach (var one in request.Users)
             {
                 car.CarUsers.Add(new CarUser { 
