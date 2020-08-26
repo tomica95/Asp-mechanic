@@ -22,6 +22,7 @@ using Implementation.Email;
 using Implementation.Logging;
 using Implementation.Profiles;
 using Implementation.Queries;
+using Implementation.Queries.BrandQueries;
 using Implementation.Queries.CarQueries;
 using Implementation.Queries.RepairQueries;
 using Implementation.Queries.UserQueries;
@@ -125,6 +126,10 @@ namespace Mechanic
             services.AddTransient<ICreateBrandCommand, EfCreateBrandCommand>();
             services.AddTransient<IUpdateBrandCommand, EfUpdateBrandCommand>();
             services.AddTransient<IDeleteBrandCommand, EfDeleteBrandCommand>();
+            #endregion
+
+            #region Brand Queries
+            services.AddTransient<IGetAllBrands, EfGetAllBrands>();
             #endregion
 
             services.AddTransient<IGetLogsQuery, EfGetLogs>();
