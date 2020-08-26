@@ -32,6 +32,11 @@ namespace DataAccess
 
             modelBuilder.Entity<CarUser>()
                 .HasKey(caruser => new { caruser.CarId, caruser.UserId });
+
+            modelBuilder.Entity<Role>().HasQueryFilter(r => r.DeletedAt == null);
+            modelBuilder.Entity<User>().HasQueryFilter(r => r.DeletedAt == null);
+            modelBuilder.Entity<Car>().HasQueryFilter(r => r.DeletedAt == null);
+            modelBuilder.Entity<Repair>().HasQueryFilter(r => r.DeletedAt == null);
         }
 
         public override int SaveChanges()
