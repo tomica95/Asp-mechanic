@@ -74,6 +74,7 @@ namespace Mechanic
             services.AddTransient<CreateRepairValidation>();
             services.AddTransient<UpdateRepairValidation>();
             services.AddTransient<CreateBrandValidation>();
+            services.AddTransient<UpdateBrandValidation>();
             #endregion
 
             #region Role CRUD
@@ -122,6 +123,7 @@ namespace Mechanic
 
             #region Brand CRUD
             services.AddTransient<ICreateBrandCommand, EfCreateBrandCommand>();
+            services.AddTransient<IUpdateBrandCommand, EfUpdateBrandCommand>();
             #endregion
 
             services.AddTransient<IGetLogsQuery, EfGetLogs>();
