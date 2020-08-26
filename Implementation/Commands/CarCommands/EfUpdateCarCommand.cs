@@ -46,6 +46,7 @@ namespace Implementation.Commands.CarCommands
                 .ToList()
                 .ForEach(x => car.CarUsers.Remove(x));
             car.Brand = null;
+            car.Leader = null;
             foreach (var one in request.Users)
             {
                 car.CarUsers.Add(new CarUser { 
