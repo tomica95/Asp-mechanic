@@ -101,6 +101,7 @@ namespace Mechanic
 
             #region Car queries
             services.AddTransient<IGetAllCars,EfGetAllCarsQuery>();
+            services.AddTransient<IGetOneCarQuery, EfGetOneCar>();
             #endregion
 
             #region Repair CRUD

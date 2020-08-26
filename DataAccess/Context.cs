@@ -20,7 +20,7 @@ namespace DataAccess
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=Tomica\SQLEXPRESS;Initial Catalog=Mechanic;Integrated Security=True");
+            optionsBuilder.UseSqlServer(@"Data Source=Tomica\SQLEXPRESS;Initial Catalog=MechanicsV2;Integrated Security=True");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
