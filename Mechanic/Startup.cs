@@ -8,6 +8,7 @@ using Application.Commands.Car;
 using Application.Commands.Repair;
 using Application.Commands.Role;
 using Application.Commands.User;
+using Application.Email;
 using Application.Queries;
 using AutoMapper;
 using DataAccess;
@@ -15,6 +16,7 @@ using Implementation.Commands.CarCommands;
 using Implementation.Commands.RepairCommands;
 using Implementation.Commands.RoleCommands;
 using Implementation.Commands.UserCommands;
+using Implementation.Email;
 using Implementation.Logging;
 using Implementation.Profiles;
 using Implementation.Queries;
@@ -165,6 +167,8 @@ namespace Mechanic
             });
 
             #endregion
+
+            services.AddTransient<IEmailSender,SmtpEmailSender>();
 
             services.AddControllers();
         }

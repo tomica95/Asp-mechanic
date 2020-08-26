@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Application.Commands.User;
 using Application.DTO;
+using Application.Email;
 using AutoMapper;
 using DataAccess;
 using Domain.Entities;
@@ -14,10 +15,11 @@ namespace Implementation.Commands.UserCommands
     public class EfCreateUserCommand : BaseCommand, ICreateUserCommand
     {
         private readonly CreateUserValidation _validation;
-
-        public EfCreateUserCommand(Context context, IMapper mapper, CreateUserValidation validation) : base(context, mapper)
+        private readonly IEmailSender _sender;
+        public EfCreateUserCommand(Context context, IMapper mapper, CreateUserValidation validation,IEmailSender sender) : base(context, mapper)
         {
             _validation = validation;
+            _sender = sender;
         }
         public int Id => 6;
 
@@ -36,6 +38,15 @@ namespace Implementation.Commands.UserCommands
             Context.Users.Add(user);
 
             Context.SaveChanges();
+
+            _sender.Send(new SendEmail
+            {
+
+                Content = "<h1>Successfull created user</h1>",
+                SendTo = request.Email,
+                Subject = "Registration of new user"
+            });
+
         }
     }
 }
