@@ -112,6 +112,7 @@ namespace Mechanic
 
             #region Repair queries
             services.AddTransient<IGetAllRepairs, EfGetAllRepairs>();
+            services.AddTransient<IGetOneRepair, EfGetOneRepair>();
             #endregion
 
             services.AddTransient<IGetLogsQuery, EfGetLogs>();
