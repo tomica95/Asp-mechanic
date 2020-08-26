@@ -34,9 +34,10 @@ namespace Mechanic.Controllers
 
         // GET api/<BrandsController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id,
+            [FromServices] IGetOneBrand query)
         {
-            return "value";
+            return Ok(executor.ExecuteQuery(query, id));
         }
 
         // POST api/<BrandsController>

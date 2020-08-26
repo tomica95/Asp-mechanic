@@ -130,6 +130,7 @@ namespace Mechanic
 
             #region Brand Queries
             services.AddTransient<IGetAllBrands, EfGetAllBrands>();
+            services.AddTransient<IGetOneBrand, EfGetOneBrandQuery>();
             #endregion
 
             services.AddTransient<IGetLogsQuery, EfGetLogs>();
