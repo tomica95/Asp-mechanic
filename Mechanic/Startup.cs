@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Application;
+using Application.Commands.Brand;
 using Application.Commands.Car;
 using Application.Commands.Repair;
 using Application.Commands.Role;
@@ -12,6 +13,7 @@ using Application.Email;
 using Application.Queries;
 using AutoMapper;
 using DataAccess;
+using Implementation.Commands.BrandCommands;
 using Implementation.Commands.CarCommands;
 using Implementation.Commands.RepairCommands;
 using Implementation.Commands.RoleCommands;
@@ -56,7 +58,7 @@ namespace Mechanic
             #endregion
 
             #region Automapper
-            services.AddAutoMapper(typeof(RoleProfile),typeof(UserProfile),typeof(CarProfile),typeof(RepairProfile),typeof(LogProfile));
+            services.AddAutoMapper(typeof(RoleProfile),typeof(UserProfile),typeof(CarProfile),typeof(RepairProfile),typeof(LogProfile),typeof(BrandProfile));
             #endregion
 
             #region Validation
@@ -71,6 +73,7 @@ namespace Mechanic
             services.AddTransient<UpdateCarValidation>();
             services.AddTransient<CreateRepairValidation>();
             services.AddTransient<UpdateRepairValidation>();
+            services.AddTransient<CreateBrandValidation>();
             #endregion
 
             #region Role CRUD
@@ -115,6 +118,10 @@ namespace Mechanic
             #region Repair queries
             services.AddTransient<IGetAllRepairs, EfGetAllRepairs>();
             services.AddTransient<IGetOneRepair, EfGetOneRepair>();
+            #endregion
+
+            #region Brand CRUD
+            services.AddTransient<ICreateBrandCommand, EfCreateBrandCommand>();
             #endregion
 
             services.AddTransient<IGetLogsQuery, EfGetLogs>();
