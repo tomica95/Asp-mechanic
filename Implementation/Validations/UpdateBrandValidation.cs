@@ -18,7 +18,7 @@ namespace Implementation.Validations
             RuleFor(dto => dto.BrandName)
                .NotEmpty()
                .Must(CheckBrandNameUniqueness)
-               .WithMessage(dto => $"'{dto.BrandName}' role name already exists in database. Please, try another role name.");
+               .WithMessage(dto => $"'{dto.BrandName}' brand name already exists in database. Please, try another brand name.");
         }
 
         /**
