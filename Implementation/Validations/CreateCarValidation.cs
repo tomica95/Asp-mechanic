@@ -20,8 +20,8 @@ namespace Implementation.Validations
                 .MinimumLength(2)
                 .MaximumLength(40)
                 .Must(CheckCarNameUnique)
-                .WithMessage(dto => $"'{dto.Name}' car name already exists in database. Please, try another car name.");
-            
+                .WithMessage(dto => $"'{dto.Name}'already exists in database. Try again");
+
             RuleFor(c => c.Description)
                 .NotEmpty()
                 .MaximumLength(200);
@@ -44,14 +44,14 @@ namespace Implementation.Validations
                 .WithMessage("Not allowed to have duplicated users");
         }
 
-        private bool CheckCarNameUnique(CarDTO dto, string name)
+        private bool CheckCarNameUnique(string Name)
         {
-            return !context.Cars.Any(c => c.Name == name && c.Id != dto.Id);
+            return !context.Cars.Any(c => c.Name == Name);
         }
 
-        private bool CheckaCarRegPlateUnique(CarDTO dto, string regPlate)
+        private bool CheckaCarRegPlateUnique(string regPlate)
         {
-            return !context.Cars.Any(u => u.RegPlate == regPlate && u.Id != dto.Id);
+            return !context.Cars.Any(c => c.RegPlate == regPlate);
         }
 
         private bool CheckAssignedUserExistance(UserDTO dto)
