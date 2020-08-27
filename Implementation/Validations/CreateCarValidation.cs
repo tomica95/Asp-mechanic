@@ -44,14 +44,14 @@ namespace Implementation.Validations
                 .WithMessage("Not allowed to have duplicated users");
         }
 
-        private bool CheckCarNameUnique(string name)
+        private bool CheckCarNameUnique(CarDTO dto, string name)
         {
-            return !context.Cars.Any(c => c.Name == name);
+            return !context.Cars.Any(c => c.Name == name && c.Id != dto.Id);
         }
 
-        private bool CheckaCarRegPlateUnique(string regPlate)
+        private bool CheckaCarRegPlateUnique(CarDTO dto, string regPlate)
         {
-            return !context.Cars.Any(c=>c.RegPlate == regPlate);
+            return !context.Cars.Any(u => u.RegPlate == regPlate && u.Id != dto.Id);
         }
 
         private bool CheckAssignedUserExistance(UserDTO dto)
